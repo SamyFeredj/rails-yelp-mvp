@@ -1,0 +1,30 @@
+<div class="my-container">
+  <h1><%= @restaurant.name %></h1>
+  <h3>Address : <%= @restaurant.address %></h3>
+  <h3>Category : <%= @restaurant.category.capitalize %></h3>
+  <% if @restaurant.phone_number %>
+  <h4>Phone number : <%= @restaurant.phone_number %></h4>
+  <% end %>
+
+  <ul class="list-group list-group-flush">
+    <% @restaurant.reviews.each do |review| %>
+    <li class="list-group-item review">
+      <div>
+        <h3><%= review.rating %> / 5</h3>
+        <p><%= review.content %></p>
+      </div>
+      <%= link_to "X", review_path(review), class:"btn btn-danger", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+    </li>
+    <% end %>
+  </ul>
+
+  <%= simple_form_for [@restaurant, @review] do |f| %>
+  <%= f.input :rating %>
+  <%= f.input :content %>
+  <%= f.submit class: "btn btn-primary" %>
+  <% end %>
+
+  <div class="links">
+    <%= link_to "Back", restaurants_path %>
+  </div>
+</div>

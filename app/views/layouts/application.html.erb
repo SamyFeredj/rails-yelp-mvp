@@ -11,6 +11,10 @@
   </head>
 
   <body>
+    <nav>
+      <%= link_to "FindFood", restaurants_path, id: "logo" %>
+      <%= link_to "Add a new restaurant", new_restaurant_path %>
+    </nav>
     <%= yield %>
   </body>
 </html>
